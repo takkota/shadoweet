@@ -1,0 +1,39 @@
+{"frames": [
+
+{
+	"filename": "dog_run_1.png",
+	"frame": {"x":0,"y":0,"w":565,"h":800},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":565,"h":800},
+	"sourceSize": {"w":565,"h":800},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "dog_run_2.png",
+	"frame": {"x":565,"y":0,"w":565,"h":800},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":565,"h":800},
+	"sourceSize": {"w":565,"h":800},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "dog_run_3.png",
+	"frame": {"x":1130,"y":0,"w":565,"h":800},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":565,"h":800},
+	"sourceSize": {"w":565,"h":800},
+	"pivot": {"x":0.5,"y":0.5}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "dog_run_sprties.png",
+	"format": "RGBA8888",
+	"size": {"w":1695,"h":800},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:5386844c6db0ec0998e296ab287cb1c4:a4e307f96ff5950e44bca5e62878a9b3:43ee4e5129843dc2ad47614e733940ff$"
+}
+}
