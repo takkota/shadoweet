@@ -1,0 +1,73 @@
+Flutter crash report; please file at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter build bundle --suppress-analytics --target lib/main.dart --depfile /Users/kota/shadoweet/build/app/intermediates/flutter/dynamicRelease/snapshot_blob.bin.d --asset-dir /Users/kota/shadoweet/build/app/intermediates/flutter/dynamicRelease/flutter_assets --release --dynamic
+
+## exception
+
+FileSystemException: FileSystemException: Cannot open file, path = '/Users/kota/flutter/bin/cache/artifacts/engine/darwin-x64/product_vm_isolate_snapshot.bin' (OS Error: No such file or directory, errno = 2)
+
+```
+#0      _File.open.<anonymous closure> (dart:io/file_impl.dart:368:9)
+#1      _rootRunUnary (dart:async/zone.dart:1132:38)
+#2      _CustomZone.runUnary (dart:async/zone.dart:1029:19)
+#3      _FutureListener.handleValue (dart:async/future_impl.dart:129:18)
+#4      Future._propagateToListeners.handleValueCallback (dart:async/future_impl.dart:642:45)
+#5      Future._propagateToListeners (dart:async/future_impl.dart:671:32)
+#6      Future._completeWithValue (dart:async/future_impl.dart:486:5)
+#7      Future._asyncComplete.<anonymous closure> (dart:async/future_impl.dart:516:7)
+#8      _rootRun (dart:async/zone.dart:1124:13)
+#9      _CustomZone.run (dart:async/zone.dart:1021:19)
+#10     _CustomZone.bindCallback.<anonymous closure> (dart:async/zone.dart:947:23)
+#11     _microtaskLoop (dart:async/schedule_microtask.dart:41:21)
+#12     _startMicrotaskLoop (dart:async/schedule_microtask.dart:50:5)
+#13     _runPendingImmediateCallback (dart:isolate/runtime/libisolate_patch.dart:115:13)
+#14     _RawReceivePortImpl._handleMessage (dart:isolate/runtime/libisolate_patch.dart:172:5)
+```
+
+## flutter doctor
+
+```
+[✓] Flutter (Channel beta, v0.9.4, on Mac OS X 10.13.1 17B1003, locale ja-JP)
+    • Flutter version 0.9.4 at /Users/kota/flutter
+    • Framework revision f37c235c32 (4 weeks ago), 2018-09-25 17:45:40 -0400
+    • Engine revision 74625aed32
+    • Dart version 2.1.0-dev.5.0.flutter-a2eb050044
+
+[✓] Android toolchain - develop for Android devices (Android SDK 28.0.3)
+    • Android SDK at /Users/kota/Library/Android/sdk
+    • Android NDK location not configured (optional; useful for native profiling support)
+    • Platform android-28, build-tools 28.0.3
+    • Java binary at: /Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/bin/java
+    • Java version OpenJDK Runtime Environment (build 1.8.0_152-release-1136-b06)
+    • All Android licenses accepted.
+
+[!] iOS toolchain - develop for iOS devices (Xcode 9.2)
+    • Xcode at /Applications/Xcode.app/Contents/Developer
+    • Xcode 9.2, Build version 9C40b
+    • ios-deploy 1.9.2
+    ! CocoaPods out of date (1.5.0 is recommended).
+        CocoaPods is used to retrieve the iOS platform side's plugin code that responds to your plugin usage on the Dart side.
+        Without resolving iOS dependencies with CocoaPods, plugins will not work on iOS.
+        For more info, see https://flutter.io/platform-plugins
+      To upgrade:
+        brew upgrade cocoapods
+        pod setup
+
+[✓] Android Studio (version 3.2)
+    • Android Studio at /Applications/Android Studio.app/Contents
+    ✗ Flutter plugin not installed; this adds Flutter specific functionality.
+    ✗ Dart plugin not installed; this adds Dart specific functionality.
+    • Java version OpenJDK Runtime Environment (build 1.8.0_152-release-1136-b06)
+
+[✓] IntelliJ IDEA Ultimate Edition (version 2017.3.5)
+    • IntelliJ at /Applications/IntelliJ IDEA.app
+    • Flutter plugin version 29.0.1
+    • Dart plugin version 173.4700
+
+[✓] Connected devices (1 available)
+    • S2 • 470808141587 • android-arm64 • Android 8.0.0 (API 26)
+
+! Doctor found issues in 1 category.
+```

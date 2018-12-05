@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_dialogflow/flutter_dialogflow.dart';
 import 'package:shadoweet/bloc/ChatMessageBloc.dart';
-import 'dart:async';
+import 'package:shadoweet/provider/ChatMessageProvider.dart';
 import 'package:shadoweet/model/ChatTimeLine.dart';
+import 'package:shadoweet/urility/SharedPreferencesHelper.dart';
+import 'package:tuple/tuple.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -10,36 +13,19 @@ class ChatScreen extends StatefulWidget {
 }
 
 class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
-  ChatMessageBloc chatMessageBloc = new ChatMessageBloc();
-  TextEditingController _textController = new TextEditingController();
-  String queryMessage = "";
+  ChatMessageBloc chatMessageBloc;
+  TextEditingController _textController;
   AnimationController animationController;
 
   @override
   void initState() {
     super.initState();
-    //chatMessageBloc = ChatMessageBloc();
     animationController =  new AnimationController(
         vsync: this,
         duration: new Duration(milliseconds: 700)
     );
-
+    _textController = new TextEditingController();
   }
-
-  void _handleSubmitted(String text) async {
-    _textController.clear();
-
-    chatMessageBloc.chatSink.add(Message(text, 1));
-    String response = await queryResponse(text);
-    chatMessageBloc.chatSink.add(Message(response, 0));
-  }
-
-  Future<String> queryResponse(query) async {
-    Dialogflow dialogflow = Dialogflow(token: "6f8235ecfadc493eaf3e85e783321f86");
-    AIResponse response = await dialogflow.sendQuery(query);
-    return response.getMessageResponse();
-  }
-
 
   Widget _buildTextIntput() {
     return new IconTheme(
@@ -53,7 +39,6 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                       children: <Widget>[
                         new TextField(
                             controller: _textController,
-                            onSubmitted: _handleSubmitted,
                             decoration: new InputDecoration.collapsed(hintText: "返答を入力する")
                         ),
                       ],
@@ -63,7 +48,10 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                     margin: const EdgeInsets.symmetric(horizontal: 4.0),
                     child: new IconButton(
                         icon: new Icon(Icons.send),
-                        onPressed: () => _handleSubmitted(_textController.text)
+                        onPressed: () {
+                          chatMessageBloc.sendMessage(_textController.text);
+                          setState(() {});
+                        }
                     ),
                   ),
                 ]
@@ -74,50 +62,68 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    chatMessageBloc = ChatMessageBlocProvider.of(context);
+    chatMessageBloc.startConversation();
+
     return new Scaffold(
-        //appBar: new AppBar(title: new Text("会話")),
-        body: new Column(
-          children: <Widget>[
-            new StreamBuilder<List<Message>>(
-              stream: chatMessageBloc.chatStream,
-              initialData: [Message("aaa", 0)],
-              builder: (context, snapshot) {
-                animationController.forward();
-                if (snapshot.data == null || snapshot.data.isEmpty) {
-                  return Flexible(child: Text("test"));
-                };
-                final list = snapshot.data.map((item) {
-                  return MessageRow(
-                      side: item.side,
-                      text: item.message,
-                      animationController: animationController
-                  );
-                }).toList();
-                return Flexible(
-                    child: ListView.builder(
-                        padding: new EdgeInsets.all(8.0),
-                        reverse: true,
-                        itemBuilder: (_, int index) => list[index],
-                        itemCount: list.length,
-                    )
-                );
-              },
-            ),
-            new Divider(height: 1.0),
-            new Container(
-                decoration: new BoxDecoration(
-                    color: Theme.of(context).cardColor
+      appBar: new AppBar(title: new Text("会話")),
+      body: new StreamBuilder<List<Message>>(
+        stream: chatMessageBloc.chatStream,
+        builder: (context, snapshot) {
+          animationController.forward();
+          if (snapshot.data == null || snapshot.data.isEmpty) {
+            return Container(
+            );
+          }
+          final list = snapshot.data.map((item) {
+            return MessageRow(
+                side: item.side,
+                text: item.text,
+                animationController: animationController
+            );
+          }).toList();
+          return Column(
+              children: <Widget>[
+                Expanded(
+                  child: ListView.builder(
+                    padding: new EdgeInsets.all(8.0),
+                    reverse: true,
+                    itemBuilder: (_, int index) => list[index],
+                    itemCount: list.length,
+                  ),
                 ),
-                child: _buildTextIntput()
-            )
-          ],
-        )
+                showTextInputIfNeed()
+              ],
+          );
+        },
+      ),
     );
+  }
+
+  Widget showTextInputIfNeed() {
+    // showTextInputはBlocに持って行く
+    if (chatMessageBloc.showTextMessage) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Divider(height: 1.0),
+          new Container(
+              decoration: new BoxDecoration(
+                  color: Theme.of(context).cardColor
+              ),
+              child: _buildTextIntput()
+          )
+        ],
+      );
+    } else {
+      return Divider(height: 1.0);
+    }
   }
 
   @override
   void dispose() {
     super.dispose();
+    chatMessageBloc.clear();
   }
 }
 
@@ -134,53 +140,71 @@ class MessageRow extends StatelessWidget {
         sizeFactor: new CurvedAnimation(parent: animationController, curve: Curves.decelerate),
         child: new Container(
             margin: const EdgeInsets.symmetric(vertical: 10.0),
-            child: constructRow(context)
+            child: _constructRow(context)
         )
     );
   }
 
-  Row constructRow(BuildContext context) {
-    if (side == 0) {
-      return new Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            new Container(
-                margin: const EdgeInsets.symmetric(horizontal: 4.0),
-                child: new CircleAvatar(child: new Text("me"))
-            ),
-            new Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                new Text("me", style: Theme.of(context).textTheme.subhead),
-                new Container(
-                  margin: const EdgeInsets.only(top: 5.0),
-                  child: new Text(text),
-                )
-              ],
-            ),
-          ]
-      );
-    } else {
-      return new Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            new Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                new Text("me", style: Theme.of(context).textTheme.subhead),
-                new Container(
-                  margin: const EdgeInsets.only(top: 5.0),
-                  child: new Text(text),
-                )
-              ],
-            ),
-            new Container(
-                margin: const EdgeInsets.symmetric(horizontal: 4.0),
-                child: new CircleAvatar(child: new Text("me"))
-            ),
-          ]
-      );
-    }
+  Widget constructRow(BuildContext context) {
+    return Expanded(
+      child: _constructRow(context),
+    );
+  }
+
+  Widget _constructRow(BuildContext context) {
+    return FutureBuilder<String>(
+      future: SharedPreferencesHelper.getDogName(),
+      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+        if (snapshot.data != null) {
+          if (side == 0) {
+            return new Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                      child: new CircleAvatar(backgroundImage: AssetImage('assets/dog_face.png'))
+                  ),
+                  new Expanded(
+                    child: new Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        new Text(snapshot.data, style: Theme.of(context).textTheme.subhead),
+                        new Container(
+                            margin: const EdgeInsets.only(top: 5.0),
+                            child: Text(text)
+                        ),
+                      ],
+                    ),
+                  )
+
+                ]
+            );
+          } else {
+            return new Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      new Text("あなた", style: Theme.of(context).textTheme.subhead),
+                      new Container(
+                        margin: const EdgeInsets.only(top: 5.0),
+                        child: new Text(text),
+                      )
+                    ],
+                  ),
+                  new Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                    child: new CircleAvatar(child: FittedBox(child: Text("あなた"), fit: BoxFit.scaleDown)),
+                  ),
+                ]
+            );
+          }
+        } else {
+          return Container();
+        }
+      }
+    );
   }
 }

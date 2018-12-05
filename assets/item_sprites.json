@@ -1,0 +1,241 @@
+{
+    "frames": [
+        {
+            "filename": "item_sprites-food-0.ase",
+            "frame": {
+                "x": 0,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "sourceSize": {
+                "w": 50,
+                "h": 50
+            },
+            "duration": 100,
+            "pivot": {
+                "y": 0.5,
+                "x": 0.5
+            }
+        },
+        {
+            "filename": "item_sprites-bone-0.ase",
+            "frame": {
+                "x": 50,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "sourceSize": {
+                "w": 50,
+                "h": 50
+            },
+            "duration": 100,
+            "pivot": {
+                "y": 0.5,
+                "x": 0.5
+            }
+        },
+        {
+            "filename": "item_sprites-ball-0.ase",
+            "frame": {
+                "x": 100,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "sourceSize": {
+                "w": 50,
+                "h": 50
+            },
+            "duration": 100,
+            "pivot": {
+                "y": 0.5,
+                "x": 0.5
+            }
+        },
+        {
+            "filename": "item_sprites-hulahoop-0.ase",
+            "frame": {
+                "x": 150,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "sourceSize": {
+                "w": 50,
+                "h": 50
+            },
+            "duration": 100,
+            "pivot": {
+                "y": 0.5,
+                "x": 0.5
+            }
+        },
+        {
+            "filename": "item_sprites-sunglasses-0.ase",
+            "frame": {
+                "x": 200,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "sourceSize": {
+                "w": 50,
+                "h": 50
+            },
+            "duration": 100,
+            "pivot": {
+                "y": 0.5,
+                "x": 0.5
+            }
+        },
+        {
+            "filename": "item_sprites-jerky-0.ase",
+            "frame": {
+                "x": 0,
+                "y": 50,
+                "w": 50,
+                "h": 50
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "sourceSize": {
+                "w": 50,
+                "h": 50
+            },
+            "duration": 100,
+            "pivot": {
+                "y": 0.5,
+                "x": 0.5
+            }
+        },
+        {
+            "filename": "item_sprites-skate-0.ase",
+            "frame": {
+                "x": 50,
+                "y": 50,
+                "w": 50,
+                "h": 50
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "sourceSize": {
+                "w": 50,
+                "h": 50
+            },
+            "duration": 100,
+            "pivot": {
+                "y": 0.5,
+                "x": 0.5
+            }
+        }
+    ],
+    "meta": {
+        "app": "http://www.aseprite.org/",
+        "version": "1.2.10-beta2",
+        "image": "item_sprites.png",
+        "format": "RGBA8888",
+        "size": {
+            "w": 256,
+            "h": 128
+        },
+        "scale": "1",
+        "frameTags": [
+            {
+                "name": "food",
+                "from": 0,
+                "to": 0,
+                "direction": "forward"
+            },
+            {
+                "name": "bone",
+                "from": 1,
+                "to": 1,
+                "direction": "forward"
+            },
+            {
+                "name": "ball",
+                "from": 2,
+                "to": 2,
+                "direction": "forward"
+            },
+            {
+                "name": "hulahoop",
+                "from": 3,
+                "to": 3,
+                "direction": "forward"
+            },
+            {
+                "name": "sunglasses",
+                "from": 4,
+                "to": 4,
+                "direction": "forward"
+            },
+            {
+                "name": "jerky",
+                "from": 5,
+                "to": 5,
+                "direction": "forward"
+            },
+            {
+                "name": "skate",
+                "from": 6,
+                "to": 6,
+                "direction": "forward"
+            }
+        ]
+    }
+}

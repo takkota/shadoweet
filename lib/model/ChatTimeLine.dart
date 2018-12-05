@@ -1,5 +1,8 @@
 import 'dart:collection';
 
+import 'package:shadoweet/enum/item.dart';
+
+
 class ChatTimeLine {
   // ここでチャット履歴を保持、管理する。
   // Repositoryクラス的なもの
@@ -9,13 +12,19 @@ class ChatTimeLine {
 
   UnmodifiableListView<Message> get items => UnmodifiableListView(_messageList);
 
-  void add (Message message) {
+  void add(Message message) async {
     _messageList.insert(0, message);
+  }
+
+  void clearAll() async {
+    _messageList.clear();
   }
 }
 
 class Message {
-  final String message;
+  Message id;
+  final String text;
   final int side;
-  const Message(this.message, this.side);
+
+  Message({this.id, this.text, this.side});
 }

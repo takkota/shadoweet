@@ -1,0 +1,185 @@
+{
+    "frames": [
+        {
+            "filename": "enemy_sprites-cat-0.ase",
+            "frame": {
+                "x": 0,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "sourceSize": {
+                "w": 50,
+                "h": 50
+            },
+            "duration": 200,
+            "pivot": {
+                "y": 0.5,
+                "x": 0.5
+            }
+        },
+        {
+            "filename": "enemy_sprites-cat-1.ase",
+            "frame": {
+                "x": 50,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "sourceSize": {
+                "w": 50,
+                "h": 50
+            },
+            "duration": 100,
+            "pivot": {
+                "y": 0.5,
+                "x": 0.5
+            }
+        },
+        {
+            "filename": "enemy_sprites-cat-2.ase",
+            "frame": {
+                "x": 100,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "sourceSize": {
+                "w": 50,
+                "h": 50
+            },
+            "duration": 200,
+            "pivot": {
+                "y": 0.5,
+                "x": 0.5
+            }
+        },
+        {
+            "filename": "enemy_sprites-husky-0.ase",
+            "frame": {
+                "x": 150,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "sourceSize": {
+                "w": 50,
+                "h": 50
+            },
+            "duration": 200,
+            "pivot": {
+                "y": 0.5,
+                "x": 0.5
+            }
+        },
+        {
+            "filename": "enemy_sprites-husky-1.ase",
+            "frame": {
+                "x": 200,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "sourceSize": {
+                "w": 50,
+                "h": 50
+            },
+            "duration": 200,
+            "pivot": {
+                "y": 0.5,
+                "x": 0.5
+            }
+        },
+        {
+            "filename": "enemy_sprites-husky-2.ase",
+            "frame": {
+                "x": 0,
+                "y": 50,
+                "w": 50,
+                "h": 50
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "sourceSize": {
+                "w": 50,
+                "h": 50
+            },
+            "duration": 200,
+            "pivot": {
+                "y": 0.5,
+                "x": 0.5
+            }
+        }
+    ],
+    "meta": {
+        "app": "http://www.aseprite.org/",
+        "version": "1.2.10-beta2",
+        "image": "enemy_sprites.png",
+        "format": "RGBA8888",
+        "size": {
+            "w": 256,
+            "h": 128
+        },
+        "scale": "1",
+        "frameTags": [
+            {
+                "name": "cat",
+                "from": 0,
+                "to": 2,
+                "direction": "forward"
+            },
+            {
+                "name": "husky",
+                "from": 3,
+                "to": 5,
+                "direction": "forward"
+            }
+        ]
+    }
+}
