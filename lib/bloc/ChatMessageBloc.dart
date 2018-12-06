@@ -65,14 +65,20 @@ class ChatMessageBloc {
       }
     }
 
+    // もっと綺麗に書きたい...
+    final messageSize = response.item1.length;
+    int loopCnt = 0;
     await Future.forEach(response.item1, (String text) async {
+      if (loopCnt + 1 == messageSize) {
+        _showTextMessage = response.item2;
+      }
       chatSink.add(Message(text: text, side: 0));
       await new Future.delayed(new Duration(milliseconds: 2500));
+      loopCnt++;
     });
-    _showTextMessage = response.item2;
   }
 
-  void sendMessage(String text) async {
+  Future sendMessage(String text) async {
     if (text == "") return;
     _showTextMessage = false;
     chatSink.add(Message(text: text, side: 1));

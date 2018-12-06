@@ -48,8 +48,8 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                     margin: const EdgeInsets.symmetric(horizontal: 4.0),
                     child: new IconButton(
                         icon: new Icon(Icons.send),
-                        onPressed: () {
-                          chatMessageBloc.sendMessage(_textController.text);
+                        onPressed: () async {
+                          await chatMessageBloc.sendMessage(_textController.text);
                           setState(() {});
                         }
                     ),
