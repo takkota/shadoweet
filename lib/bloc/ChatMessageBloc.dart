@@ -39,6 +39,7 @@ class ChatMessageBloc {
     _showTextMessage = false;
     _chatTimeLine.clearAll();
     _new = true;
+    sessionId = Uuid().toString();
   }
 
   void startConversation() async {
@@ -47,11 +48,7 @@ class ChatMessageBloc {
     var response = Tuple2(List<String>(), false);
 
     Future<Tuple2<List<String>, bool>> _randomChat() async {
-      if (Random().nextBool()) {
-        return await _queryDialogFlow(eventName: "misc");
-      } else {
-        return await _queryDialogFlow(eventName: "quiz");
-      }
+      return await _queryDialogFlow(eventName: "quiz" + (Random().nextInt(10) + 1).toString());
     }
 
     if (await SharedPreferencesHelper.isFirstConversation()) {
@@ -68,7 +65,7 @@ class ChatMessageBloc {
       }
     }
 
-    Future.forEach(response.item1, (String text) async {
+    await Future.forEach(response.item1, (String text) async {
       chatSink.add(Message(text: text, side: 0));
       await new Future.delayed(new Duration(milliseconds: 2500));
     });
